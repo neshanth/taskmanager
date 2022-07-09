@@ -1,23 +1,13 @@
-import React, { useEffect } from "react";
-import { useAuth } from "../../hooks/useAuth";
+import React from "react";
 import Login from "../login/Login";
-import Spinner from "../spinner/Spinner";
 
 function Home() {
-  const [auth, checkAuth, loading, user] = useAuth();
-
-  useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
-
-  if (loading) {
-    return <Spinner />;
-  }
-
+  let auth = localStorage.getItem("isAuth") === "true";
+  let { name } = JSON.parse(localStorage.getItem("user"));
   return (
     <div>
       {auth ? (
-        <h2>Welcome {user}</h2>
+        <h2>Welcome {name} </h2>
       ) : (
         <div className="container">
           <div className="row justify-content-center">

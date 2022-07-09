@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
 import "./navbar.css";
 
 function Navbar({ logout }) {
-  const [auth] = useAuth();
+  let auth = localStorage.getItem("isAuth") === "true";
   return (
     <nav className="navbar">
       <div className="container-fluid">

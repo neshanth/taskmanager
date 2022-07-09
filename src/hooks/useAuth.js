@@ -9,11 +9,12 @@ export const useAuth = () => {
   const checkAuth = async () => {
     try {
       const response = await api.get("/api/user");
-      const { name } = response.data;
+      const { name, email } = response.data;
       setAuth(true);
       setUser(name);
       setLoading(false);
       localStorage.setItem("isAuth", true);
+      localStorage.setItem("user", JSON.stringify({ name, email }));
     } catch (err) {
       setLoading(false);
       setAuth(false);
