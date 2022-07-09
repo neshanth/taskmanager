@@ -1,0 +1,22 @@
+.add-btn,
+.check-box {
+  transform: scale(1.5);
+}
+
+.add-btn {
+  background-color: none;
+  color: var(--bg--primary);
+}
+.add-btn:hover {
+  color: var(--black);
+}
+
+.add-btn:hover,
+.fa-trash {
+  cursor: pointer;
+}
+
+.task-complete {
+  text-decoration: line-through;
+  opacity: 0.5;
+}

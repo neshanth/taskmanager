@@ -1,0 +1,9 @@
+.sb-sidenav-dark {
+  background-color: var(--bg--primary);
+}
+.nav {
+  background-color: var(--black);
+}
+.sb-sidenav-dark .sb-sidenav-menu .nav-link {
+  color: var(--white);
+}

@@ -1,0 +1,6 @@
+.popup {
+  position: fixed;
+  background-color: #000;
+  color: white;
+  top: 500px;
+}

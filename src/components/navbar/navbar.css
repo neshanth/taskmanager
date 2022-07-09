@@ -1,0 +1,13 @@
+.navbar {
+  background-color: var(--black);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.navbar a {
+  color: var(--white);
+}
+
+.navbar a:hover {
+  color: var(--bg--primary);
+}
