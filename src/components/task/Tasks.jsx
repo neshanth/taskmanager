@@ -12,6 +12,7 @@ const Tasks = () => {
   const [tasks, setTasks] = useState([]);
   const [taskId, setTaskId] = useState(null);
   const { loading, setLoading } = useContext(UserContext);
+  const [filters] = useState(["Low", "Medium", "High"]);
 
   const getTasks = async () => {
     setLoading(true);
@@ -64,7 +65,16 @@ const Tasks = () => {
     <>
       <div className="row justify-content-center">
         <div className="col-md-10">
-          <ul className="list-group">
+          <h2 className="text-center">All Tasks</h2>
+          <div className="filters-btn d-flex justify-content-end dropdown">
+            <i className="fa fa-filter dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" />
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              {filters.map((filter) => {
+                return <li className="dropdown-item filter-priority">{filter}</li>;
+              })}
+            </ul>
+          </div>
+          <ul className="list-group my-4">
             {tasks.map((task) => {
               return (
                 <li key={task.id} className="list-group-item d-flex align-items-baseline justify-content-between">

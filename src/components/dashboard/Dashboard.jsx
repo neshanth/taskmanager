@@ -26,6 +26,11 @@ export default class Dashboard extends Component {
                 <EditTaskForm />
               </MainContent>
             </Route>
+            <Route exact path="/dashboard/collections">
+              <MainContent>
+                <p>Collections</p>
+              </MainContent>
+            </Route>
           </Switch>
         </div>
       </>

@@ -20,3 +20,7 @@
   text-decoration: line-through;
   opacity: 0.5;
 }
+
+.filter-priority {
+  cursor: pointer;
+}
