@@ -2,7 +2,7 @@ import { useState } from "react";
 import api from "../../api/api";
 
 const TaskForm = ({ getTasks }) => {
-  const [taskData, setTaskData] = useState({ task: "", description: "", due_date: "" });
+  const [taskData, setTaskData] = useState({ task: "", description: "", due_date: "", priority: "Low" });
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -51,6 +51,14 @@ const TaskForm = ({ getTasks }) => {
               <div className="mb-3">
                 <label htmlFor="due_date">Due Date</label>
                 <input type="date" name="due_date" className="form-control" onChange={handleInput} value={taskData.due_date} />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="priority">Priority</label>
+                <select value={taskData.priority} onChange={handleInput} name="priority" className="form-select" aria-label="Priority">
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
               </div>
               <div className="submit-btn d-flex justify-content-center">
                 <button className="btn btn-custom-primary" data-bs-dismiss="modal">

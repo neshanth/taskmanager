@@ -12,13 +12,15 @@ const Tasks = () => {
   const [tasks, setTasks] = useState([]);
   const [taskId, setTaskId] = useState(null);
   const { loading, setLoading } = useContext(UserContext);
-  const [filters] = useState(["Low", "Medium", "High"]);
+  const [filters] = useState(["Low", "Medium", "High", "All"]);
+  const [filteredTasks, setFilteredTasks] = useState([]);
 
   const getTasks = async () => {
     setLoading(true);
     const response = await api.get("/api/tasks");
     const tasks = response.data.tasks;
     setTasks([...tasks]);
+    setFilteredTasks([...tasks]);
     setLoading(false);
   };
 
@@ -53,6 +55,15 @@ const Tasks = () => {
     }
   };
 
+  const filterTasks = (filter) => {
+    if (filter !== "All") {
+      let filteredTasks = tasks.filter((task) => task.priority === filter);
+      setFilteredTasks(filteredTasks);
+    } else {
+      setFilteredTasks([...tasks]);
+    }
+  };
+
   useEffect(() => {
     getTasks();
   }, []);
@@ -68,14 +79,18 @@ const Tasks = () => {
           <h2 className="text-center">All Tasks</h2>
           <div className="filters-btn d-flex justify-content-end dropdown">
             <i className="fa fa-filter dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" />
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              {filters.map((filter) => {
-                return <li className="dropdown-item filter-priority">{filter}</li>;
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              {filters.map((filter, index) => {
+                return (
+                  <li key={index} onClick={() => filterTasks(filter)} className="dropdown-item filter-priority">
+                    {filter}
+                  </li>
+                );
               })}
             </ul>
           </div>
           <ul className="list-group my-4">
-            {tasks.map((task) => {
+            {filteredTasks.map((task) => {
               return (
                 <li key={task.id} className="list-group-item d-flex align-items-baseline justify-content-between">
                   <div className={`task-data d-flex align-items-center ${task.status ? "task-complete" : ""}`}>

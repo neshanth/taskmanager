@@ -10,7 +10,7 @@ function PrivateRoute({ children, ...rest }) {
         if (auth) {
           return children;
         } else {
-          return <Redirect to="/login" />;
+          return <Redirect to="/" />;
         }
       }}
     />

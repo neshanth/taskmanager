@@ -8,7 +8,7 @@ import { UserContext } from "../../context";
 import Spinner from "../spinner/Spinner";
 
 const EditTaskForm = () => {
-  const [taskData, setTaskData] = useState({ task: "", description: "", due_date: "" });
+  const [taskData, setTaskData] = useState({ task: "", description: "", due_date: "", priority: "" });
   const { loading, setLoading } = useContext(UserContext);
   const { id } = useParams();
   let history = useHistory();
@@ -27,8 +27,8 @@ const EditTaskForm = () => {
       try {
         setLoading(true);
         const response = await api.get(`/api/tasks/${id}`);
-        const { task, description, due_date } = response.data;
-        setTaskData({ task, description, due_date });
+        const { task, description, due_date, priority } = response.data;
+        setTaskData({ task, description, due_date, priority });
         setLoading(false);
       } catch (err) {
         console.log(err);
@@ -44,7 +44,7 @@ const EditTaskForm = () => {
       setLoading(true);
       await api.put(`/api/tasks/${id}`, taskData);
       setLoading(false);
-      setTaskData({ task: "", description: "", due_date: "" });
+      setTaskData({ task: "", description: "", due_date: "", priority: "Low" });
       history.push("/dashboard/tasks");
     } catch (err) {
       console.log(err);
@@ -74,6 +74,14 @@ const EditTaskForm = () => {
           <div className="mb-3">
             <label htmlFor="due_date">Due Date</label>
             <input type="date" name="due_date" className="form-control" onChange={handleInput} value={taskData.due_date} />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="priority">Priority</label>
+            <select value={taskData.priority} onChange={handleInput} name="priority" className="form-select" aria-label="Priority">
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
           </div>
           <div className="submit-btn d-flex justify-content-center">
             <Link to="/dashboard/tasks" className="btn">
